@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+    <!--================Home Banner Area =================-->
+    <section class="banner_area banner_area__empty">
+        <div class="banner_inner banner_inner__empty"></div>
+    </section>
+    <!--================End Home Banner Area =================-->
+
+    <!--================Login Box Area =================-->
+    <section class="login_box_area p_80">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="login_form_inner">
+                        <form class="row login_form" action="{{ path('security.sign-in') }}" method="post" id="contactForm" novalidate="novalidate">
+                            <div class="col-md-12 form-group">
+                                <input type="text" class="form-control" name="username" placeholder="Логин">
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <input type="text" class="form-control" name="password" placeholder="Пароль">
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <div class="creat_account">
+                                    <input type="checkbox" id="f-option2" name="_remember_me">
+                                    <label for="f-option2">Запомнить</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <button type="submit" value="submit" class="btn submit_btn">Вход</button>
+                                <a href="{{ path('security.restore-password.view') }}">Забыли пароль?</a>
+                            </div>
+                            {% if errorMessage %}
+                                <div class="col-md-12 form-group form_errors">
+                                    <div class="form_errors__item">{{ errorMessage }}</div>
+                                </div>
+                            {% endif %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Login Box Area =================-->
+
+{% endblock %}

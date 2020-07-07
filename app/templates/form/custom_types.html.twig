@@ -1,0 +1,9 @@
+{% block image_widget %}
+    {% spaceless %}
+        <div style="background-color: #0B7FC7">
+            <img src="{{ form.path.vars.value }}">
+            {{ form_widget(form.path) }}
+            <button>rm</button>
+        </div>
+    {% endspaceless %}
+{% endblock %}

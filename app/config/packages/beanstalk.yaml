@@ -1,0 +1,5 @@
+beanstalk:
+  processor:
+    dsn: tcp://beanstalkd:11300
+  on_error:
+    listener: App\Background\QueueErrorHandler

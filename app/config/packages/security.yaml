@@ -1,0 +1,98 @@
+security:
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+#            memory:
+#                users:
+#                    nds: { password: '$2y$13$4gmwyUYxO66kERM.0T8v3uAr0klI7TVHY09wdcMyFKqUfiOekm6SW', roles:[ "ROLE_W_ADMIN" ] }
+            entity:
+                class: App\Entity\User
+                property: 'email'
+
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        public_api_v1:
+            pattern: ^/v1/create-token
+            security: false
+
+        api_v1:
+            pattern: ^/v1/
+            guard:
+                authenticators:
+                    - App\Security\TokenAuthenticator
+
+        main:
+            anonymous: true
+            guard:
+                authenticators:
+                    - App\Security\LoginFormAuthenticator
+                entry_point: App\Security\LoginFormAuthenticator
+            remember_me:
+                secret:   '%kernel.secret%'
+                lifetime: 604800 # 1 week in seconds
+                path:     /
+            logout:
+                path: security.sign-out
+                target: home
+
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+
+    encoders:
+        App\Entity\User:
+            algorithm: 'bcrypt'
+
+    access_control:
+#         - { path: ^/sign-in$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+#         - { path: ^/v1/create-token, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    role_hierarchy:
+        ROLE_IMAGE_ROOT:
+            - ROLE_ADMIN_IMAGE_LIST
+            - ROLE_ADMIN_IMAGE_EDIT
+            - ROLE_ADMIN_IMAGE_VIEW
+            - ROLE_ADMIN_IMAGE_CREATE
+            - ROLE_ADMIN_IMAGE_DELETE
+        ROLE_TEST_ROOT:
+            - ROLE_ADMIN_TEST_LIST
+            - ROLE_ADMIN_TEST_EDIT
+            - ROLE_ADMIN_TEST_VIEW
+            - ROLE_ADMIN_TEST_CREATE
+            - ROLE_ADMIN_TEST_DELETE
+        ROLE_PRODUCT_CHARACTERISTIC_ROOT:
+            - ROLE_ADMIN_PRODUCT_CHARACTERISTIC_LIST
+            - ROLE_ADMIN_PRODUCT_CHARACTERISTIC_EDIT
+            - ROLE_ADMIN_PRODUCT_CHARACTERISTIC_VIEW
+            - ROLE_ADMIN_PRODUCT_CHARACTERISTIC_CREATE
+            - ROLE_ADMIN_PRODUCT_CHARACTERISTIC_DELETE
+        ROLE_PRODUCT_ROOT:
+            - ROLE_ADMIN_PRODUCT_LIST
+            - ROLE_ADMIN_PRODUCT_EDIT
+            - ROLE_ADMIN_PRODUCT_VIEW
+            - ROLE_ADMIN_PRODUCT_CREATE
+            - ROLE_ADMIN_PRODUCT_DELETE
+        ROLE_CATEGORY_ROOT:
+            - ROLE_ADMIN_CATEGORY_LIST
+            - ROLE_ADMIN_CATEGORY_EDIT
+            - ROLE_ADMIN_CATEGORY_VIEW
+            - ROLE_ADMIN_CATEGORY_CREATE
+        ROLE_SCALAR_TYPED_ATTRIBUTE_ROOT:
+            - ROLE_ADMIN_SCALAR_TYPED_ATTRIBUTE_LIST
+            - ROLE_ADMIN_SCALAR_TYPED_ATTRIBUTE_EDIT
+            - ROLE_ADMIN_SCALAR_TYPED_ATTRIBUTE_VIEW
+            - ROLE_ADMIN_SCALAR_TYPED_ATTRIBUTE_CREATE
+        ROLE_ADMIN:
+            - ROLE_TEST_ROOT
+            - ROLE_IMAGE_ROOT
+            - ROLE_CATEGORY_ROOT
+            - ROLE_SCALAR_TYPED_ATTRIBUTE_ROOT
+            - ROLE_PRODUCT_ROOT
+            - ROLE_PRODUCT_CHARACTERISTIC_ROOT
