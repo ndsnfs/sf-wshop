@@ -1,0 +1,2 @@
+image:
+  path: /uploads/{date}/{image}

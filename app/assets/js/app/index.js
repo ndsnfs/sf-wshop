@@ -6,8 +6,13 @@
  */
 
 // any CSS you import will output into a single css file (app.css in this case)
-import '../css/app.css';
+import '../../css/app.css';
+import '../../scss/app.scss';
 
 import $ from 'jquery';
 
-console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
+
+// create global variables
+global.$ = global.jQuery = $
+
+console.log('Hello Webpack Encore! Edit me in assets/js/app/index.js');

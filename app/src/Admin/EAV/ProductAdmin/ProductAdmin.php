@@ -2,6 +2,7 @@
 namespace App\Admin\EAV\ProductAdmin;
 
 use App\Entity\Domain\Category;
+use App\Form\ImageListType;
 use App\Form\ImageType;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -33,8 +34,11 @@ class ProductAdmin extends AbstractAdmin
                     'sortable' => 'position',
                     'limit' => 7,
                 ])
-                ->add('images', \Sonata\AdminBundle\Form\Type\CollectionType::class, [
+                ->add('images', ImageListType::class, [
                     'entry_type' => ImageType::class,
+                    'entry_options' => [
+                        'label' => false,
+                    ],
                     'allow_add' => true,
                     'allow_delete' => true,
                 ])

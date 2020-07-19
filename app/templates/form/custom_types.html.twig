@@ -1,9 +1,210 @@
 {% block image_widget %}
     {% spaceless %}
-        <div style="background-color: #0B7FC7">
-            <img src="{{ form.path.vars.value }}">
-            {{ form_widget(form.path) }}
-            <button>rm</button>
+        <div class="col-lg-3 col-md-3">
+            <div class="catalog_item__img_wrapper">
+                <img src="{{ app.request.schemeAndHttpHost ~ '/' ~ form.path.vars.value }}" class="img-fluid">
+            </div>
+{#            {{ form_widget(form) }}#}
+
+{#            <input#}
+{#                    type="checkbox"#}
+{#                    id="{{ form.vars.id }}__delete"#}
+{#                    name="{{ form.vars.full_name }}[_delete]"#}
+{#                    class=" form-control">#}
+            <button class="btn btn-danger">rm</button>
         </div>
     {% endspaceless %}
 {% endblock %}
+
+
+{% block image_list_widget %}
+
+    <a href="" id="image_adder">add image</a>
+    <div class="row">
+        {% for child in form|filter(child => not child.rendered) %}
+            {{ form_widget(child) }}
+        {% endfor %}
+    </div>
+
+
+    <div class="modal">
+        <div class="modal__overlay">
+            <div class="modal__window">
+                <button class="modal__close">×</button>
+                <div class="modal__body">
+                    <div class="crop-preview">
+                        <div class="crop-preview__panel mb-2">
+                            <span data-action="back">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path fill-rule="evenodd" d="M8.354 11.354a.5.5 0 0 0 0-.708L5.707 8l2.647-2.646a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708 0z"/>
+                                    <path fill-rule="evenodd" d="M11.5 8a.5.5 0 0 0-.5-.5H6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5z"/>
+                                </svg>
+                            </span>
+                            <span data-action="upload">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-box-arrow-in-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M4.646 7.854a.5.5 0 0 0 .708 0L8 5.207l2.646 2.647a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 0 0 0 .708z"/>
+                                    <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-1 0v9a.5.5 0 0 0 .5.5z"/>
+                                    <path fill-rule="evenodd" d="M1.5 2.5A1.5 1.5 0 0 1 3 1h10a1.5 1.5 0 0 1 1.5 1.5v8A1.5 1.5 0 0 1 13 12h-1.5a.5.5 0 0 1 0-1H13a.5.5 0 0 0 .5-.5v-8A.5.5 0 0 0 13 2H3a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h1.5a.5.5 0 0 1 0 1H3a1.5 1.5 0 0 1-1.5-1.5v-8z"/>
+                                </svg>
+                            </span>
+                        </div>
+                        <div class="crop-preview__img"></div>
+                    </div>
+                    <div class="crop-box">
+                        <div class="crop-box__panel">
+                            <label for="img-loader">
+                                <input id="img-loader" type="file">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-box-arrow-in-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M4.646 8.146a.5.5 0 0 1 .708 0L8 10.793l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z"/>
+                                    <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-1 0v-9A.5.5 0 0 1 8 1z"/>
+                                    <path fill-rule="evenodd" d="M1.5 13.5A1.5 1.5 0 0 0 3 15h10a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 13 4h-1.5a.5.5 0 0 0 0 1H13a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5v-8A.5.5 0 0 1 3 5h1.5a.5.5 0 0 0 0-1H3a1.5 1.5 0 0 0-1.5 1.5v8z"/>
+                                </svg>
+                            </label>
+                            <span data-action="reset">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-counterclockwise" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                  <path fill-rule="evenodd" d="M12.83 6.706a5 5 0 0 0-7.103-3.16.5.5 0 1 1-.454-.892A6 6 0 1 1 2.545 5.5a.5.5 0 1 1 .91.417 5 5 0 1 0 9.375.789z"/>
+                                  <path fill-rule="evenodd" d="M7.854.146a.5.5 0 0 0-.708 0l-2.5 2.5a.5.5 0 0 0 0 .708l2.5 2.5a.5.5 0 1 0 .708-.708L5.707 3 7.854.854a.5.5 0 0 0 0-.708z"/>
+                                </svg>
+                            </span>
+                            <span data-action="crop">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-crop" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                  <path fill-rule="evenodd" d="M3.5.5A.5.5 0 0 1 4 1v13h13a.5.5 0 0 1 0 1H3.5a.5.5 0 0 1-.5-.5V1a.5.5 0 0 1 .5-.5z"/>
+                                  <path fill-rule="evenodd" d="M.5 3.5A.5.5 0 0 1 1 3h2.5a.5.5 0 0 1 0 1H1a.5.5 0 0 1-.5-.5zm5.5 0a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4H6.5a.5.5 0 0 1-.5-.5zM14.5 14a.5.5 0 0 1 .5.5V17a.5.5 0 0 1-1 0v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                </svg>
+                            </span>
+                        </div>
+                        <div>
+                            <img id="image-crop" src="">
+                            {#                            https://fengyuanchen.github.io/cropperjs/images/picture.jpg#}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        let data = {
+            cropper: null,
+            croppedCanvas: null
+        };
+
+        window.onload = function () {
+
+            let modalShower = document.querySelector('#image_adder');
+            let imgLoader = document.querySelector('#img-loader');
+            let imgCrop = document.querySelector('#image-crop');
+            let cropPreviewImg = document.querySelector('.crop-preview__img');
+            let cropperBox = document.querySelector('.crop-box');
+            let cropPreview = document.querySelector('.crop-preview');
+            let cropPreviewActions = document.querySelectorAll('.crop-preview__panel>span');
+            let cropBoxActions = document.querySelectorAll('.crop-box__panel>span');
+
+
+
+            let cropper;
+
+            let modal = new Modal();
+
+            modalShower.onclick = function (e) {
+                modal.show();
+                e.preventDefault();
+            };
+
+            imgLoader.onchange = function(e) {
+                let img = this.files[0];
+                if (!img.type.match('image')) {
+                    alert('Не файл!');
+                    return;
+                }
+
+                imgCrop.src = URL.createObjectURL(img)
+                if (cropper instanceof Cropper) {
+                    cropper.destroy();
+                }
+
+                cropper = new Cropper(imgCrop, {
+                    viewMode: 1,
+                    cropBoxResizable: false,
+                    aspectRatio: NaN
+                });
+
+                setTimeout(function () { cropRefresh(cropper) }, 100);
+
+                for (let i=0; i < cropBoxActions.length; i++) {
+                    cropBoxActions[i].onclick =  function (e) {
+                        switch (this.getAttribute('data-action')) {
+                            case 'reset':
+                                cropper.reset();
+                                cropRefresh(cropper);
+                                break;
+                            case 'crop':
+                                crop(cropper)
+                                break;
+                        }
+                    };
+                }
+            };
+
+            for (let i=0; i < cropPreviewActions.length; i++) {
+                cropPreviewActions[i].onclick = function (e) {
+                    switch (this.getAttribute('data-action')) {
+                        case 'upload':
+                            uploadCropped();
+                            break;
+                        case 'back':
+                            toggleCropper(cropperBox, cropPreview);
+                            break;
+
+                    }
+                };
+            }
+
+            function uploadCropped() {
+                data.croppedCanvas.toBlob(function (blob) {
+                    let form = new FormData();
+                    form.append('file', blob, 'test.png');
+                    form.append('type', 'type_sliced_image');
+
+                    let promise = fetch('{{ path('upload') }}', {
+                        body: form,
+                        method: 'POST'
+                    })
+                });
+            }
+
+            function toggleCropper(view1, view2) {
+                let res1 = 'none', res2 = 'block';
+                if (view1.style.display === res1 && view2.style.display === res2) {
+                    res1 = 'block';
+                    res2 = 'none';
+                }
+                view1.style.display = res1;
+                view2.style.display = res2;
+            }
+
+            function cropRefresh(cr) {
+                cr.setDragMode('move');
+                cr.setData({
+                    width: 500,
+                    height: 533
+                });
+            }
+
+            function crop(cr) {
+                let preview = document.createElement('img');
+                while (cropPreviewImg.firstChild) {
+                    cropPreviewImg.removeChild(cropPreviewImg.firstChild);
+                }
+                let croppedCanvas = data.croppedCanvas = cr.getCroppedCanvas();
+                preview.src = croppedCanvas.toDataURL('image/jpeg');
+                cropPreviewImg.appendChild(preview);
+                toggleCropper(cropperBox, cropPreview)
+            }
+        }
+
+    </script>
+{% endblock %}
+

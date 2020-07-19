@@ -29,14 +29,14 @@ services:
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=database
-
-  beanstalkd:
-    container_name: ${PROJECT_NAME}-beanstalkd
-    image: schickling/beanstalkd
-    ports:
-      - 11300:11300
-
-  mailhog:
-    image: mailhog/mailhog
-    ports:
-      - 8025:8025
+#
+#  beanstalkd:
+#    container_name: ${PROJECT_NAME}-beanstalkd
+#    image: schickling/beanstalkd
+#    ports:
+#      - 11300:11300
+#
+#  mailhog:
+#    image: mailhog/mailhog
+#    ports:
+#      - 8025:8025

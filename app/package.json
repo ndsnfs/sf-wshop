@@ -14,6 +14,9 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "jquery": "^3.5.1"
+        "cropperjs": "^1.5.7",
+        "jquery": "^3.5.1",
+        "node-sass": "^4.14.1",
+        "sass-loader": "^9.0.2"
     }
 }

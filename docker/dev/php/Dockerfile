@@ -10,10 +10,13 @@ RUN apt-get update && apt-get install -y \
         zip \
         unzip \
         libpq-dev \
+        libpng-dev \
     && mkdir /app \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && docker-php-ext-install pdo pdo_pgsql \
     && chown -R 1000:www-data $composer_home_dir \
     && chmod -R g+rwx $composer_home_dir
+
+RUN docker-php-ext-install gd
 
 WORKDIR /app

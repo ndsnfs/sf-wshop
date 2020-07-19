@@ -1,7 +1,7 @@
 <?php
 namespace App\Form;
 
-use App\Entity\Domain\Media\Image;
+use App\Entity\Domain\File\SlicedImage;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -21,7 +21,10 @@ class ImageType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'data_class' => Image::class,
+                'data_class' => SlicedImage::class,
+                'allow_extra_fields' => true,
+                'allow_add'      => true,
+                'allow_delete'   => true,
             ]);
     }
 }

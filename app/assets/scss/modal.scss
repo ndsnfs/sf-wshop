@@ -1,0 +1,76 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+html,body,.modal__overlay,.modal {
+  width: 100%;
+  height: 100%;
+}
+.modal {
+  position: fixed;
+  top:0;
+  left: 0;
+  display: none;
+}
+.modal__overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0,0,0,.4);
+}
+.modal__window {
+  padding-top: 34px;
+  background-color: #fff;
+  width: 98%;
+  z-index: 1000;
+  border-radius: 3px;
+  position: relative;
+}
+.modal__body {
+  padding: 20px;
+}
+.modal__close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 0 13px;
+  height: 34px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #999;
+  text-shadow: 0 1px 0 #fff;
+}
+.modal__close:hover {
+  color: #555;
+}
+
+@media screen and (min-width: 576px) {
+  .modal__window {
+    width: 98%;
+  }
+}
+@media screen and (min-width: 768px) {
+  .modal__window {
+    width: 80%;
+  }
+}
+@media screen and (min-width: 992px) {
+  .modal__window {
+    width: 60%;
+  }
+}
+
+
+.fa_modal_enter>.modal__overlay {
+  background-color: rgba(0,0,0,.0);
+}
+.fa_modal_enter_active>.modal__overlay {
+  transition: background .1s ease;
+}
+.fa_modal_leave_active>.modal__overlay {
+  background-color: rgba(0,0,0,.0);
+  transition: background .1s ease;
+}

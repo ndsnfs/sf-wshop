@@ -9,6 +9,9 @@ sonata_admin:
     security:
       handler: sonata.admin.security.handler.role
 
+    templates:
+        layout: 'standard_layout.html.twig'
+
 sonata_block:
     blocks:
         sonata.admin.block.admin_list:

@@ -2,7 +2,7 @@
 namespace App\Entity\Domain\EAV;
 
 use App\Entity\Domain\Category;
-use App\Entity\Domain\Media\Image;
+use App\Entity\Domain\File\SlicedImage;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -39,9 +39,10 @@ class Product
 	 */
 	private $characteristics;
     /**
-     * @var Image[]
+     * @var SlicedImage[]
      * @ORM\ManyToMany(
-     *     targetEntity="App\Entity\Domain\Media\Image"
+     *     targetEntity="App\Entity\Domain\File\SlicedImage",
+     *     orphanRemoval=true
      * )
      * @ORM\JoinTable(
      *     name="product_images",
@@ -124,5 +125,10 @@ class Product
     public function addImage($image): void
     {
         $this->images->add($image);
+    }
+
+    public function removeImage(SlicedImage $image)
+    {
+        $this->characteristics->removeElement($image);
     }
 }

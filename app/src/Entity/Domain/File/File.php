@@ -1,5 +1,5 @@
 <?php
-namespace App\Entity\Domain\Media;
+namespace App\Entity\Domain\File;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\InheritanceType("SINGLE_TABLE")
  */
-abstract class Media
+abstract class File
 {
     /**
      * @var int
@@ -22,7 +22,7 @@ abstract class Media
      */
     private $path;
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }

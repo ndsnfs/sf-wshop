@@ -15,9 +15,6 @@ class HomeController extends AbstractController
 	 */
 	public function home(AProducer $producer)
 	{
-        if(!$this->isGranted('edit', 'asasas')) {
-            die;
-        }
 //		$payload = new MailTemplatingPayload();
 //		$payload->from = 'admin@mail.ru';
 //		$payload->to = 'n_ds@mail.ru';

@@ -5,6 +5,9 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'ru'
+    public_dir: '%kernel.root_dir%/../public'
+
+    upload_dir: 'uploaded'
 
 services:
     # default configuration for services in *this* file
@@ -56,7 +59,7 @@ services:
             - { name: sonata.admin, manager_type: orm, group: EAV, label: 'Характеристика продукта' }
 
     admin.image:
-        class: App\Admin\Media\ImageAdmin
-        arguments: [~, App\Entity\Domain\Media\Image, ~]
+        class: App\Admin\File\SlicedImageAdmin
+        arguments: [~, App\Entity\Domain\File\SlicedImage, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, group: TEST, label: 'Фотографии продукта' }
