@@ -33,7 +33,7 @@
         "symfony/web-link": "4.4.*",
         "symfony/webpack-encore-bundle": "^1.7",
         "symfony/yaml": "4.4.*",
-        "twig/twig": "v2.12.5"
+        "twig/twig": "v2.15.3"
     },
     "require-dev": {
         "symfony/debug-pack": "*",
